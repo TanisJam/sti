@@ -19,12 +19,12 @@ This is my personal approach for the challenge.
 - Form validation using Formik.
 - Good coding practices.
 - Good route naming practices.
-- Modularized code in reusable and independant \* components.
+- Modularized code in reusable and independant components.
 
 #### Things to do:
 
-- [x] Consume Superheroes data fron [SuperheroApi](https://superheroapi.com/)
-- [ ] Protect different sections validating that the user is authenticated
+- [x] Consume superheroes data fron [SuperheroApi](https://superheroapi.com/)
+- [x] Protect different sections validating that the user is authenticated
 - [x] Handle HTTP GET requests with Axios
 - [x] Make app be responsive with Bootstrap
 
@@ -37,11 +37,11 @@ This is my personal approach for the challenge.
   * [x] Members alignment must be 3 good and 3 bad.
   * [x] Should be possible to remove a member.
 * #### Login Form
-  * [ ] Form must be render if user is not authenticated.
-    * [ ] Email
-    * [ ] Password
-    * [ ] Send button
-  * [ ] Form must be validated.
+  * [x] Form must be render if user is not authenticated.
+    * [x] Email
+    * [x] Password
+    * [x] Send button
+  * [x] Form must be validated.
 * #### Team
   * [x] App should render team members in a grid list
     * [x] Hero name

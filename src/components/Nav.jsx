@@ -1,10 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { logOut } from "../features/login/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut, selectToken } from "../features/login/userSlice";
 
 export default function Nav() {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectToken);
   const history = useHistory();
 
   const handleLogOut = () => {
@@ -13,12 +14,21 @@ export default function Nav() {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-dark">
-      <div className="container d-fex flex-row">
-        <h1 className="mx-auto p-4">Superhero Team Inspector</h1>
-        <button className="btn btn-primary" onClick={handleLogOut}>
-          Log Out
-        </button>
+    <nav className="navbar navbar-dark bg-dark py-2">
+      <div className="container">
+        <span className="navbar-brand mb-0 h1">
+          <img src="/logo.png" alt="" width="30" height="30" className="me-2" />
+          Superhero Team Inspector
+        </span>
+        {isLoggedIn && (
+          <button
+            className="btn btn-sm btn-outline-secondary"
+            type="button"
+            onClick={handleLogOut}
+          >
+            Log Out
+          </button>
+        )}
       </div>
     </nav>
   );

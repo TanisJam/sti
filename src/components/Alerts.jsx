@@ -16,7 +16,7 @@ export default function Alerts({ alert }) {
       style={{ zIndex: "2000" }}
     >
       <div className={`d-flex fw-bolder ${styles[alert.type]}`}>
-        <div className="toast-body mx-auto py-1">{alert.message}</div>
+        <div className="toast-body text-center mx-auto py-1">{alert.message}</div>
       </div>
     </div>
   );
