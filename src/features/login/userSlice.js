@@ -14,7 +14,7 @@ export const logIn = createAsyncThunk(
   "user/logIn",
   async (data, { dispatch }) => {
     try {
-      const response = await axios.post("http://challenge-react.alkemy.org", {
+      const response = await axios.post("//challenge-react.alkemy.org", {
         email: data.email,
         password: data.password,
       });
