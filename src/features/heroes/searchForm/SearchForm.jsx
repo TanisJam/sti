@@ -22,7 +22,7 @@ export default function SearchForm({ onSearch }) {
         }}
       >
         {({ isSubmitting }) => (
-          <div className="row mb-5">
+          <div className="row mb-5 position-relative">
             <Form className="form-floating d-flex">
               <Field
                 type="text"
@@ -30,7 +30,7 @@ export default function SearchForm({ onSearch }) {
                 className="form-control"
                 id="floatingInput"
                 placeholder="Hero Name"
-                aria-describedby="button-addon2"
+                aria-describedby="buttonSearch"
               />
 
               <label htmlFor="floatingInput" className="px-4">
@@ -39,14 +39,14 @@ export default function SearchForm({ onSearch }) {
               <button
                 className="btn btn-primary"
                 type="submit"
-                id="button-addon2"
+                id="buttonSearch"
                 disabled={isSubmitting}
               >
-                Submit
+                Search
               </button>
             </Form>
             <ErrorMessage
-              className="mx-auto text-center"
+              className="position-absolute bottom-0 start-50 translate-middle-x text-danger badge"
               name="text"
               component="div"
             />

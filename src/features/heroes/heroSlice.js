@@ -30,13 +30,13 @@ const initialState = {
 export const searchHeroes = createAsyncThunk(
   "heroes/searchHeroes",
   async (name) => {
-    const response = await axios({
-      method: "get",
-      url: `/api/${ACCESS_TOKEN}/search/${name}`,
-      data: {},
-    });
-    const data = response.data;
-    return data;
+    try {
+      const response = await axios.get(`/api/${ACCESS_TOKEN}/search/${name}`);
+      const data = response.data;
+      return data;
+    } catch (err) {
+      throw err;
+    }
   }
 );
 
@@ -146,7 +146,7 @@ export const heroesSlice = createSlice({
       })
       .addCase(searchHeroes.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action;
+        state.error = "Error while loading results";
       });
   },
 });

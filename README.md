@@ -1,44 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Alkemy Challenge Frontend
 
-## Available Scripts
+This is my personal approach for the challenge.
 
-In the project directory, you can run:
+> Superhero Team Inspector is an app that lets you create a fake superheroes team to easely see their combined powerstats.
 
-### `npm start`
+### Technologies that I should use:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- Axios
+- Bootstrap
+- Formik
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### What will be evaluated:
 
-### `npm test`
+- Resposive, modern and intuitive design.
+- Bootstrap must be used for responsive.
+- Basic knowlage of React.
+- Form validation using Formik.
+- Good coding practices.
+- Good route naming practices.
+- Modularized code in reusable and independant \* components.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Things to do:
 
-### `npm run build`
+- [x] Consume Superheroes data fron [SuperheroApi](https://superheroapi.com/)
+- [ ] Protect different sections validating that the user is authenticated
+- [x] Handle HTTP GET requests with Axios
+- [x] Make app be responsive with Bootstrap
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Specific functional requirements
+* ##### Home
+  * [x] Team Members.
+  * [x] Team powerstats.
+  * [x] Average weight and height.
+  * [x] Team must have 6 members.
+  * [x] Members alignment must be 3 good and 3 bad.
+  * [x] Should be possible to remove a member.
+* #### Login Form
+  * [ ] Form must be render if user is not authenticated.
+    * [ ] Email
+    * [ ] Password
+    * [ ] Send button
+  * [ ] Form must be validated.
+* #### Team
+  * [x] App should render team members in a grid list
+    * [x] Hero name
+    * [x] Hero image
+    * [x] Powerstats
+    * [x] Actions to see details or remove from the team
+* #### Hero Search
+  * [x] A form should make GET request to the endpoint and display results.
+    * [x] Hero name
+    * [x] Hero image
+    * [x] Actions to see details or add to the team
+* #### Hero Details
+  * [x] By clicking the hero card the details should be displayed.
+    * [x] Weight
+    * [x] Height
+    * [x] Name
+    * [x] Alias
+    * [x] Eye color
+    * [x] Hair color
+    * [x] Workplace
+* #### Tests
+  * [ ] Authenticated user verification when entering a route.
+  * [ ] Field validation in login or search form submit.
+  * [ ] Handling exceptions when getting API errors.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+ 
