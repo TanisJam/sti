@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import dataTest from "./heroTest.json";
-
 const ACCESS_TOKEN = "10159582774652838";
-
 const initialState = {
   results: [],
   status: "idle",
@@ -14,9 +11,9 @@ const initialState = {
   },
   error: "",
   team: {
-    members: dataTest.test,
+    members: [],
     alignment: {
-      good: 2,
+      good: 0,
       bad: 0,
     },
     stats: {
@@ -46,20 +43,35 @@ export const searchHeroes = createAsyncThunk(
 export const showAlert =
   ({ message, type }) =>
   (dispatch) => {
-    console.log("entra");
-    dispatch(alertTrigered({ message, type }));
     setTimeout(() => {
       dispatch(alertDismissed());
     }, 2000);
+    dispatch(alertTrigered({ message, type }));
   };
+export const updateStats = () => (dispatch, getState) => {
+  const state = getState();
+  const heroes = state.heroes.team.members;
+  const initialStats = initialState.team.stats;
+  let stats = heroes.reduce((team, hero) => {
+    const heroStats = hero.powerstats;
+    let actual = {};
+    for (const key in team) {
+      let normalizedHerostat =
+        heroStats[key] === "null" ? 0 : parseInt(heroStats[key]);
+      actual[key] = parseInt(team[key]) + normalizedHerostat;
+    }
+    return actual;
+  }, initialStats);
+
+  dispatch(updatedStats(stats));
+};
 export const addHero = (hero) => (dispatch, getState) => {
   const state = getState();
   const members = state.heroes.team.members;
   const teamAlignment = state.heroes.team.alignment;
   const id = hero.id;
-  const heroAlignment = hero.biography.alignment;
+  const heroAlignment = hero.biography.alignment === "good" ? "good" : "bad";
   const isInTeam = members.find((member) => member.id === id);
-
   if (isInTeam) {
     dispatch(
       showAlert({
@@ -68,16 +80,14 @@ export const addHero = (hero) => (dispatch, getState) => {
       })
     );
     return;
-  } else {
-    if (teamAlignment[heroAlignment] > 3) {
-      dispatch(
-        showAlert({
-          message: `No more than 3 ${heroAlignment} heroes are allowed.`,
-          type: "danger",
-        })
-      );
-      return;
-    }
+  } else if (teamAlignment[heroAlignment] >= 3) {
+    dispatch(
+      showAlert({
+        message: `No more than 3 ${heroAlignment} heroes are allowed.`,
+        type: "danger",
+      })
+    );
+    return;
   }
   dispatch(
     showAlert({
@@ -85,8 +95,12 @@ export const addHero = (hero) => (dispatch, getState) => {
       type: "success",
     })
   );
-  
-  dispatch(addedHero(hero));
+  dispatch(addedHero({ hero, heroAlignment }));
+  dispatch(updateStats());
+};
+export const removeHero = (hero) => (dispatch) => {
+  dispatch(removedHero(hero));
+  dispatch(updateStats());
 };
 
 export const heroesSlice = createSlice({
@@ -94,9 +108,21 @@ export const heroesSlice = createSlice({
   initialState,
   reducers: {
     addedHero: (state, action) => {
-      const heroAlignment = action.payload.biography.alignment;
-      state.team.members.push(action.payload);
+      console.log(action);
+      const heroAlignment = action.payload.heroAlignment;
+      state.team.members.push(action.payload.hero);
       state.team.alignment[heroAlignment]++;
+    },
+    removedHero: (state, action) => {
+      const heroAlignment = action.payload.biography.alignment;
+      const heroId = action.payload.id;
+      state.team.members = state.team.members.filter(
+        (hero) => hero.id !== heroId
+      );
+      state.team.alignment[heroAlignment]--;
+    },
+    updatedStats: (state, action) => {
+      state.team.stats = action.payload;
     },
     alertTrigered: (state, action) => {
       state.alert = { ...action.payload, show: true };
@@ -131,6 +157,12 @@ export const selectTeamStats = (state) => state.heroes.team.stats;
 export const selectSearchResults = (state) => state.heroes.results;
 export const selectAlert = (state) => state.heroes.alert;
 
-export const { addedHero, alertTrigered, alertDismissed } = heroesSlice.actions;
+export const {
+  addedHero,
+  removedHero,
+  updatedStats,
+  alertTrigered,
+  alertDismissed,
+} = heroesSlice.actions;
 
 export default heroesSlice.reducer;

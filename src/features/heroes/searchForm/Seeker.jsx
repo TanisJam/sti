@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchHeroes, selectSearchResults } from "./heroSlice";
-import HeroList from "./HeroList";
+import { searchHeroes, selectSearchResults } from "../heroSlice";
+import HeroList from "../HeroList";
+import SearchForm from "./SearchForm";
 
 export default function Seeker() {
   const heroesResults = useSelector(selectSearchResults);
@@ -31,17 +32,18 @@ export default function Seeker() {
     );
   } else if (status === "succeeded") {
     if (heroesResults.length > 0) {
-      content = <HeroList heroes={heroesResults} type="search" />;
+      content = <HeroList heroes={heroesResults} context="search" />;
     }
   } else if (status === "failed") {
     content = <div>{error}</div>;
   }
 
   return (
-    <div className="container">
+    <div className="container mb-5">
       <div className="form-group col-md-8 col-xl-6 mx-auto">
         <label className="form-label mt-4">Find heroes</label>
-        <form className="form-floating mb-3 d-flex" onSubmit={handleSubmit}>
+        <SearchForm />
+        {/* <form className="form-floating mb-3 d-flex" onSubmit={handleSubmit}>
           <input
             type="text"
             className="form-control"
@@ -55,7 +57,7 @@ export default function Seeker() {
             Search
           </button>
           <label htmlFor="floatingInput">Hero Name</label>
-        </form>
+        </form> */}
       </div>
 
       <div className="d-flex flex-wrap justify-content-center gap-1 col-md-8 mx-auto">

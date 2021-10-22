@@ -9,7 +9,7 @@ const styles = {
 export default function Alerts({ alert }) {
   return (
     <div
-      className="toast show position-fixed bottom-0 end-0 m-5"
+      className="toast show position-fixed bottom-0 start-50 translate-middle-x mx-auto mb-5"
       role="alert"
       aria-live="assertive"
       aria-atomic="true"

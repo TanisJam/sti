@@ -19,3 +19,9 @@
   bottom: 1rem;
   padding: 0;
 }
+.good:hover {
+  outline: 1px solid #00ff37;
+}
+.bad:hover {
+  outline: 1px solid #ff0000;
+}

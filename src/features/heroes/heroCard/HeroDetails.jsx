@@ -1,7 +1,33 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addHero, removeHero } from "../heroSlice";
 import "./HeroDetails.css";
 
-export default function HeroDetails({ close, hero }) {
+export default function HeroDetails({ close, hero, context }) {
+  const dispatch = useDispatch();
+
+  let footer;
+  if (context === "search") {
+    footer = (
+      <button
+        type="button"
+        className="btn btn-success mx-auto"
+        onClick={() => dispatch(addHero(hero))}
+      >
+        Add
+      </button>
+    );
+  } else if (context === "team") {
+    footer = (
+      <button
+        type="button"
+        className="btn btn-danger mx-auto"
+        onClick={() => dispatch(removeHero(hero))}
+      >
+        Remove
+      </button>
+    );
+  }
   return (
     <>
       <div className="overlay"></div>
@@ -34,23 +60,27 @@ export default function HeroDetails({ close, hero }) {
                     </tr>
                     <tr>
                       <th>Full name</th>
-                      <td>{hero.biography['full-name']}</td>
+                      <td>{hero.biography["full-name"]}</td>
                     </tr>
                     <tr>
                       <th>Aliases</th>
-                      <td>{hero.biography.aliases.join(' - ')}</td>
+                      <td>{hero.biography.aliases.join(" - ")}</td>
                     </tr>
                     <tr>
                       <th>Eye color</th>
-                      <td>{hero.appearance['eye-color']}</td>
+                      <td>{hero.appearance["eye-color"]}</td>
                     </tr>
                     <tr>
                       <th>Hair color</th>
-                      <td>{hero.appearance['hair-color']}</td>
+                      <td>{hero.appearance["hair-color"]}</td>
                     </tr>
                     <tr>
                       <th>Workplace</th>
                       <td>{hero.work.base}</td>
+                    </tr>
+                    <tr>
+                      <th>Alignment</th>
+                      <td>{hero.biography.alignment}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -59,9 +89,10 @@ export default function HeroDetails({ close, hero }) {
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
+            {footer}
+            {/* <button type="button" className="btn btn-primary">
               Add to team
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
