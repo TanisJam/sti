@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-export default function SearchForm() {
+export default function SearchForm({ onSearch }) {
   return (
     <>
       <Formik
@@ -13,8 +13,9 @@ export default function SearchForm() {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values.text);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSearch(values.text);
+          resetForm();
           setTimeout(() => {
             setSubmitting(false);
           }, 400);
@@ -32,7 +33,9 @@ export default function SearchForm() {
                 aria-describedby="button-addon2"
               />
 
-              <label htmlFor="floatingInput" className="px-4">Hero Name</label>
+              <label htmlFor="floatingInput" className="px-4">
+                Hero Name
+              </label>
               <button
                 className="btn btn-primary"
                 type="submit"
@@ -52,21 +55,4 @@ export default function SearchForm() {
       </Formik>
     </>
   );
-}
-{
-  /* <form className="form-floating mb-3 d-flex" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="form-control"
-            id="floatingInput"
-            placeholder="Hero Name"
-            aria-describedby="button-addon2"
-            value={heroName}
-            onChange={handleChange}
-          />
-          <button className="btn btn-primary" type="submit" id="button-addon2">
-            Search
-          </button>
-          <label htmlFor="floatingInput">Hero Name</label>
-        </form> */
 }

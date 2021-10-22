@@ -108,7 +108,6 @@ export const heroesSlice = createSlice({
   initialState,
   reducers: {
     addedHero: (state, action) => {
-      console.log(action);
       const heroAlignment = action.payload.heroAlignment;
       state.team.members.push(action.payload.hero);
       state.team.alignment[heroAlignment]++;
