@@ -21,9 +21,9 @@ export default function Login({ onLogin }) {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          onLogin(values);
           setTimeout(() => {
             setSubmitting(false);
+            onLogin(values);
           }, 400);
         }}
       >
