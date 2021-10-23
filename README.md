@@ -4,6 +4,10 @@ This is my personal approach for the challenge.
 
 > Superhero Team Inspector is an app that lets you create a fake superheroes team to easely see their combined powerstats.
 
+> ##### [Live](https://sti.vercel.app/)
+>
+> Email: challenge@alkemy.org
+> Password: react
 
 ### Technologies that I should use:
 

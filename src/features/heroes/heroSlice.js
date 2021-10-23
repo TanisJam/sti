@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const ACCESS_TOKEN = "10159582774652838";
+const HERO_API_URL = `https://superheroapi.com/api.php/${ACCESS_TOKEN}/search/`;
 const initialState = {
   results: [],
   status: "idle",
@@ -31,7 +32,7 @@ export const searchHeroes = createAsyncThunk(
   "heroes/searchHeroes",
   async (name) => {
     try {
-      const response = await axios.get(`/api/${ACCESS_TOKEN}/search/${name}`);
+      const response = await axios.get(HERO_API_URL + name);
       const data = response.data;
       return data;
     } catch (err) {

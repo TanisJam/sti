@@ -2,7 +2,6 @@
   "name": "alkemy",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://superheroapi.com/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^4.2.4",

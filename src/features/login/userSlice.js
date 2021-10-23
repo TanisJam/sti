@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { showAlert } from "../heroes/heroSlice";
 
-const LOGIN_URL = "http://challenge-react.alkemy.org";
+//const LOGIN_URL = "http://challenge-react.alkemy.org";
 const LOGIN_URL_PROXY = "https://node-api-proxy-alkemy.herokuapp.com/";
 
 const user = localStorage.getItem("USER_TOKEN");
