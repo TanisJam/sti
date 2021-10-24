@@ -66,18 +66,19 @@ export const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = "idle";
         state.error = "";
         state.token = action.payload;
       })
       .addCase(logIn.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = "idle";
         state.error = "Error while login";
       });
   },
 });
 
 export const selectToken = (state) => state.user.token;
+export const selectStatus = (state) => state.user.status;
 
 export const { loggedOut } = userSlice.actions;
 

@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectStatus } from "./userSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function Login({ onLogin }) {
+  const status = useSelector(selectStatus);
+
   return (
     <div className="mx-auto container text-center mt-5">
       <Formik
@@ -21,10 +25,8 @@ export default function Login({ onLogin }) {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            setSubmitting(false);
-            onLogin(values);
-          }, 400);
+          onLogin(values);
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, values }) => (
@@ -72,9 +74,18 @@ export default function Login({ onLogin }) {
                 <button
                   type="submit"
                   className="btn btn-primary p-3"
-                  disabled={isSubmitting}
+                  disabled={status !== "idle"}
                 >
-                  Login
+                  {status !== "idle" ? (
+                    <div
+                      className="spinner-border spinner-border-sm text-white"
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
             </Form>
