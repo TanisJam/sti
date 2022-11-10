@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const ACCESS_TOKEN = "10159582774652838";
-const HERO_API_URL = `https://superheroapi.com/api.php/${ACCESS_TOKEN}/search/`;
+const HERO_API_URL = `https://www.superheroapi.com/api.php/${ACCESS_TOKEN}/search/`;
 const initialState = {
   results: [],
   status: "idle",
